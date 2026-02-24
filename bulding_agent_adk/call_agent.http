@@ -1,0 +1,27 @@
+# create session
+POST http://localhost:8000/apps/sql_assistant_agent/users/u_123/sessions/s_123
+Content-Type: application/json
+
+{
+  "key1": "value1",
+  "key2": 42
+}
+
+###
+
+# run agent with streaming
+POST http://localhost:8000/run_sse
+Content-Type: application/json
+
+{
+"appName": "sql_assistant_agent",
+"userId": "u_123",
+"sessionId": "s_123",
+"newMessage": {
+    "role": "user",
+    "parts": [{
+    "text": "List the top 10 customers by total order amount"
+    }]
+},
+"streaming": true
+}
