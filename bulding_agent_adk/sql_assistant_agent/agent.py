@@ -71,11 +71,9 @@ sql_junior_writer_agent = LlmAgent(
     name="sql_junior_writer_agent",
     model=DEFAULT_MODEL,
     description="Generates SQL queries from user prompts.",
-    global_instruction=(
+    instruction=(
         "You are a data assistant specializing in SQL. "
         f"Use this schema to write syntactically correct SQL queries"
-    ),
-    instruction=(
         "Use the provided schema in session state under 'db_schema' to write a SQL query. "
         "Store your result in 'sql_query'. Do not execute it."
     ),
@@ -105,7 +103,7 @@ sql_senior_writer_agent = Agent(
 class CheckStatusAndEscalate(BaseAgent):
     async def _run_async_impl(self, ctx: InvocationContext) -> AsyncGenerator[Event, None]:
         is_valid = ctx.session.state.get("sql_results", {}).get("is_valid", False)
-        should_stop = not is_valid
+        should_stop = is_valid
         yield Event(author=self.name, actions=EventActions(escalate=should_stop))
 
 
@@ -113,8 +111,10 @@ class CheckStatusAndEscalate(BaseAgent):
 # --- Loop Agent ---
 root_agent = LoopAgent(
     name="root_agent",
-    sub_agents=[sql_junior_writer_agent, sql_senior_writer_agent, CheckStatusAndEscalate(name="check_status_and_escalate")],
-    max_iterations=1,
+    sub_agents=[sql_junior_writer_agent,
+                sql_senior_writer_agent,
+                CheckStatusAndEscalate(name="check_status_and_escalate")],
+    max_iterations=5,
     before_agent_callback=on_before_agent_call,
     after_agent_callback=on_after_agent_callback,
     description="Coordinates SQL generation and execution pipeline.",

@@ -46,7 +46,9 @@ root_agent = Agent(
       call reimburse() to reimburse the amount to the employee. If the manager
       rejects, you will inform the employee of the rejection.
     """,
-    tools=[reimburse, LongRunningFunctionTool(func=ask_for_approval)],
+    tools=[
+        reimburse,
+        LongRunningFunctionTool(func=ask_for_approval)],
     generate_content_config=types.GenerateContentConfig(temperature=0.1),
 )
 

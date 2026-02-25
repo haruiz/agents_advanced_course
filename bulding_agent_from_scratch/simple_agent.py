@@ -6,6 +6,7 @@ from modihub.llm import LLM
 
 load_dotenv(find_dotenv()) # Loads API keys from .env file
 
+# ReAct React & Reasoning Agentic Loop: Perceive, Decide, Act
 class Agent(ABC):
     def __init__(self, name="Agent"):
         self.name = name
@@ -29,6 +30,7 @@ class Agent(ABC):
     def run(self):
         """Agentic loop: Perceive, Decide, Act"""
         print(f"{self.name} initialized. Type 'exit' to quit.")
+        # TODO - implement callback before the agent loop
         while True:
             perception = self.perceive()
             decision = self.decide(perception)
@@ -36,6 +38,7 @@ class Agent(ABC):
                 print(f"{self.name}: Shutting down.")
                 break
             self.act(decision)
+            # TODO - implement callback after the agent loop
             time.sleep(0.5)  # Simulating processing time
 
 class BasicAgent(Agent):
@@ -100,7 +103,7 @@ if __name__ == "__main__":
 
     agent = LLMAgent(
         name="verbal-agent",
-        model="models/gemini-3-pro-preview",
+        model="models/gemini-pro-latest",
         system_instruction="generate the output in XML format",
         tools=[get_the_weather]
     )

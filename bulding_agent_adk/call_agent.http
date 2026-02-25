@@ -25,3 +25,7 @@ Content-Type: application/json
 },
 "streaming": true
 }
+
+###
+
+GET http://localhost:8000/list-apps
