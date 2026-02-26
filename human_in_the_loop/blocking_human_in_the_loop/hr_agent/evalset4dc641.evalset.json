@@ -1,0 +1,101 @@
+{
+  "eval_set_id": "evalset4dc641",
+  "name": "evalset4dc641",
+  "eval_cases": [
+    {
+      "eval_id": "case5ff8f8",
+      "conversation": [
+        {
+          "invocation_id": "e-e6e1f49d-846e-4f18-aa7f-606a6124b62d",
+          "user_content": {
+            "parts": [
+              {
+                "function_response": {
+                  "id": "adk-36115d34-e28f-47af-bc87-c3f74500d1d3",
+                  "name": "adk_request_confirmation",
+                  "response": {
+                    "response": "{\"confirmed\": false, \"payload\": {\"approved_days\":5}}"
+                  }
+                }
+              }
+            ],
+            "role": "user"
+          },
+          "final_response": {
+            "parts": [
+              {
+                "text": "I have processed your request. However, only 5 days were approved out of the 15 requested.",
+                "thought_signature": "EsACCr0CAb4-9vsjwGi-qKb2lY9SvUQ71SOC4_bMTNtoAQwML_dqt66wpRU6TeOumCdk6aRIc629QtycFfdKWlrwgGDR9XYL4pd3l3h5qJqVPziS7m3JL5U-3Spohw2CN4ND7p7rsDYsDhVe65J2Kc4vmtKYEucuKkjpt6s-uIRADn303b0GKQplaK1Ki_EnZRvso3j8tFJPzLVZ8B-YFHHpHg22hmmofJd9xLzboCC-xNmKvyruz25RmT8S0V8_dBlZyrostdOa9NnUrIie210Aiyr5PmvWZmebU6HivcO13zlQ2PDnRaInk_p-6i2aq1q6C_2mPBlMLKDhrd0b_Z4xIbLZawtPGsQBbyBmtI9pxS0VYIb8DtquEaDmp0X075kZWEDV9SzNbuim7vKoA9j7jxu4TPNJLVaWEiDCHq9UqXs="
+              }
+            ],
+            "role": "model"
+          },
+          "intermediate_data": {
+            "invocation_events": [
+              {
+                "author": "time_off_agent",
+                "content": {
+                  "parts": [
+                    {
+                      "function_call": {
+                        "id": "adk-f2c7f45a-0d0f-4925-8fe5-324e8827846e",
+                        "args": {
+                          "days": 15
+                        },
+                        "name": "request_time_off"
+                      },
+                      "thought_signature": "EvkCCvYCAb4-9vvB8pc9DEK2MVo3v28yT61uu1un14rjlEk4_WqK-v1og2-HMi_PAh7mm6UngKdvQTF8Ox4zNTfEvNfza-8OyxR7BuZ2XhaUW-A78V86H7UAD8kT7C7JHLUeofd0S286QEBLoRe10cp0SMsIjuR3fCuKUn3sg9DjXMp0eXd8dk5GCET0mxXYz9KkFi3JAjGNSxlb2y7MPnqFd7qQKa6-XDhPFq-wCfFP1UVI7nALQymWELEGk_eDLiZ8VMFWkLWP7LZl0899GNI-h3p4F5HkND1Bgw78i7tNb0-Ds7oF27iI6ixS4ShGDOdSkbIfqRv6QuGlBeH5DCBSJjfddZPB2carqATefvCyAfIClEr459Sejf5inxqOmNqYGz94lFmic2zjijDpKzTywSY3weGMC_hOCRgK8PFMuoXJ9ZVGUzYwsb1pX6D4iHkIXFyVymMP68VF7TJtg5pey0Xz6xnODLKEeBcNd9mXndnMuh-skkwGKe0="
+                    }
+                  ],
+                  "role": "model"
+                }
+              },
+              {
+                "author": "time_off_agent",
+                "content": {
+                  "parts": [
+                    {
+                      "function_response": {
+                        "id": "adk-f2c7f45a-0d0f-4925-8fe5-324e8827846e",
+                        "name": "request_time_off",
+                        "response": {
+                          "status": "Manager approval is required."
+                        }
+                      }
+                    }
+                  ],
+                  "role": "user"
+                }
+              },
+              {
+                "author": "time_off_agent",
+                "content": {
+                  "parts": [
+                    {
+                      "function_response": {
+                        "id": "adk-f2c7f45a-0d0f-4925-8fe5-324e8827846e",
+                        "name": "request_time_off",
+                        "response": {
+                          "status": "ok",
+                          "approved_days": 5
+                        }
+                      }
+                    }
+                  ],
+                  "role": "user"
+                }
+              }
+            ]
+          },
+          "creation_timestamp": 1772075621.972331
+        }
+      ],
+      "session_input": {
+        "app_name": "hr_agent",
+        "user_id": "user"
+      },
+      "creation_timestamp": 1772075711.8371048
+    }
+  ],
+  "creation_timestamp": 1772075657.347233
+}

@@ -97,6 +97,7 @@ root_agent = Agent(
         LongRunningFunctionTool(func=ask_for_approval)],
     generate_content_config=types.GenerateContentConfig(temperature=0.1),
     after_agent_callback=on_after_agent_call,
+
 )
 
 
@@ -123,6 +124,7 @@ async def process_event(event, user_id: str, session_id: str):
     if event and event.content and event.content.parts:
         for part in event.content.parts:
             if part.function_call:
+                # a new approval request has been queued if the function call ID is in the long_running_tool_ids of the event
                 if event.long_running_tool_ids and part.function_call.id in event.long_running_tool_ids:
                     logger.info(f"Long Running Tool Call: {part.function_call.name}({part.function_call.args})")
                     

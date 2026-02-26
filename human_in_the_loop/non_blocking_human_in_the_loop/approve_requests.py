@@ -2,8 +2,11 @@ import asyncio
 import json
 import os
 import logging
+from typing import Optional, Any
+
 from google.adk.runners import Runner
-from google.adk.sessions import DatabaseSessionService
+from google.adk.sessions import DatabaseSessionService, BaseSessionService, Session
+from google.adk.sessions.base_session_service import ListSessionsResponse, GetSessionConfig
 from google.genai import types
 from dotenv import load_dotenv
 from rich.console import Console
@@ -19,6 +22,7 @@ APP_NAME = os.getenv("APP_NAME", "memory_agent_app")
 db_url = "sqlite+aiosqlite:///sessions.db"
 session_service = DatabaseSessionService(db_url=db_url)
 console = Console()
+
 
 async def approve_requests():
     if not os.path.exists(APPROVAL_REQUESTS_FILE):
@@ -56,7 +60,8 @@ async def approve_requests():
             status = "approved" if choice == 'y' else "rejected"
             approval_response_data = {
                 "status": status,
-                "message": f"Manager has {status} the request."
+                "message": f"Manager has {status} the request.",
+                "observations": "You are expending so much money!!!"
             }
             
             # Create the tool output for resumption

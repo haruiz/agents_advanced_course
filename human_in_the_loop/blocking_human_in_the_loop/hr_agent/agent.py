@@ -1,5 +1,6 @@
 
 from google.adk import Agent
+from google.adk.apps import App, ResumabilityConfig
 from google.adk.tools.function_tool import FunctionTool
 from google.adk.tools.tool_confirmation import ToolConfirmation
 from google.adk.tools.tool_context import ToolContext
@@ -45,9 +46,8 @@ def request_time_off(days: int, tool_context: ToolContext):
       'approved_days': approved_days,
   }
 
-
 root_agent = Agent(
-    model='gemini-2.5-flash',
+    model='gemini-3-pro-preview',
     name='time_off_agent',
     instruction="""
     You are a helpful assistant that can help employees with reimbursement and time off requests.
@@ -65,3 +65,6 @@ root_agent = Agent(
     ],
     generate_content_config=types.GenerateContentConfig(temperature=0.1),
 )
+# {"confirmed": false, "payload": {"approved_days":5}}
+app = App(name="hr_agent", root_agent=root_agent, resumability_config=ResumabilityConfig(is_resumable=True))
+
